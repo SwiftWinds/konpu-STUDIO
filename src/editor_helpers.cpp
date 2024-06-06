@@ -29,6 +29,7 @@ struct Note
 struct Pattern
 {
   float length;
+  float bpm;
   std::string name;
   std::string id;
   std::vector<std::vector<Note>> channels;
@@ -36,7 +37,7 @@ struct Pattern
   template <class Archive>
   void serialize( Archive & ar )
   {
-    ar(cereal::make_nvp("length", length), cereal::make_nvp("name", name), cereal::make_nvp("id", id), cereal::make_nvp("tracks", channels));
+    ar(cereal::make_nvp("length", length), cereal::make_nvp("bpm", bpm), cereal::make_nvp("name", name), cereal::make_nvp("id", id), cereal::make_nvp("tracks", channels));
   }
 };
 
@@ -61,14 +62,13 @@ struct Channel
 struct Song
 {
   std::string filename;
-  float bpm;
   std::vector<Channel> channels;
   std::vector<Pattern> patterns;
 
   template <class Archive>
   void serialize( Archive & ar )
   {
-    ar(cereal::make_nvp("bpm", bpm), cereal::make_nvp("patterns", patterns), cereal::make_nvp("channels", channels));
+    ar(cereal::make_nvp("patterns", patterns), cereal::make_nvp("channels", channels));
   }
 };
 

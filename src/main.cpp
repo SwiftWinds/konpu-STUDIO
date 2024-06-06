@@ -156,7 +156,6 @@ class KonpuStudio : public App {
       applySkin();
 
       // Set up song
-      song.bpm = 120;
       song.channels = std::vector<Channel>();
       song.patterns = std::vector<Pattern>();
 
@@ -375,6 +374,8 @@ class KonpuStudio : public App {
               playhead = 0;
               if (currentPattern != patterns->size() - 1) {
                 currentPattern++;
+                bpm = patterns->at(currentPattern).bpm;
+                playInterval = ((float) dt / 2.f) * (bpm / 120.f);
               }
             }
           } else {
@@ -707,13 +708,16 @@ class KonpuStudio : public App {
             cereal::JSONInputArchive archive(is);
             archive(song);
 
+            bpm = song.patterns.at(currentPattern).bpm;
+            std::cout << "MATEO: bpm " << bpm << std::endl;
+
             if (song.channels.size() < NUM_CHANNELS) {
               std::cout << "Song has " << song.channels.size() << " channels, readjusting to " << NUM_CHANNELS <<
                   std::endl;
 
               for (int i = 0; i < song.patterns.size(); i++) {
                 for (int j = song.channels.size(); j < NUM_CHANNELS; j++) {
-                  song.patterns[i].channels.push_back({});
+                  song.patterns[i].channels.emplace_back();
                 }
               }
 
