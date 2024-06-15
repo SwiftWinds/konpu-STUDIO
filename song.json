@@ -5,98 +5,98 @@
                 "bpm": 49.0,
                 "length": 5.75,
                 "name": "",
-                "id": "937fd4e8-3e03-470d-8eba-2094392465d1",
+                "id": "6ac93dfc-aadd-41c4-b7e3-fbb20179c3a7",
                 "tracks": [
                     [
                         {
-                            "id": "19c51548-683b-4cfe-9f09-7c27a10f4674",
+                            "id": "f197395c-86f5-4c3c-b5e3-e7b5e0440b35",
                             "pitch": 60.0,
-                            "time": 0,
-                            "duration": 1.2219
+                            "time": 0.0,
+                            "duration": 0.25
                         },
                         {
-                            "id": "1e921169-83a9-44a2-a740-9ba642dac956",
+                            "id": "2b1d8b70-7bcb-4c6f-a07e-34aa1bd87b19",
                             "pitch": 57.0,
-                            "time": 1.224489,
-                            "duration": 1.2219
+                            "time": 0.25,
+                            "duration": 0.25
                         },
                         {
-                            "id": "023a6bb5-4a16-416b-978f-6f7cd7dd6374",
+                            "id": "245a1109-4e8f-4f85-99b5-a026236d5d06",
                             "pitch": 48.0,
-                            "time": 2.4489780000000003,
-                            "duration": 2.4464
+                            "time": 0.5,
+                            "duration": 0.5
                         },
                         {
-                            "id": "85b78fe3-9c8b-4695-8633-c7e735288de4",
+                            "id": "8ecf82b3-8d05-49b0-8c57-b320eae59e18",
                             "pitch": 48.0,
-                            "time": 4.897956000000001,
-                            "duration": 1.2219
+                            "time": 1.0,
+                            "duration": 0.25
                         },
                         {
-                            "id": "0a36063e-9aa1-4720-be7c-1a0a960ecbaa",
+                            "id": "89edfb41-fba5-4fa0-8000-d9a1eb22d54b",
                             "pitch": 53.0,
-                            "time": 6.122445000000001,
-                            "duration": 1.2219
+                            "time": 1.25,
+                            "duration": 0.25
                         },
                         {
-                            "id": "bfa4aef8-9795-4d2c-9fbb-a371a784f341",
+                            "id": "803d989d-4516-40aa-b1fb-296a16030584",
                             "pitch": 57.0,
-                            "time": 7.346934000000001,
-                            "duration": 1.2219
+                            "time": 1.5,
+                            "duration": 0.25
                         },
                         {
-                            "id": "24f7a124-8a2a-48ac-a2b5-9f92aafb7e46",
+                            "id": "74e63af1-ed2d-4cab-b48c-e7968d892d66",
                             "pitch": 50.0,
-                            "time": 8.571423000000001,
-                            "duration": 1.2219
+                            "time": 1.75,
+                            "duration": 0.25
                         },
                         {
-                            "id": "752e1072-66c7-4861-a647-8437f800e380",
+                            "id": "b9b7e4bc-025e-4a9a-be28-03a27ee0e8da",
                             "pitch": 57.0,
-                            "time": 9.795912,
-                            "duration": 2.4464
+                            "time": 2.0,
+                            "duration": 0.5
                         },
                         {
-                            "id": "fe792bc1-94a9-4e89-9dca-c4203d3ac15c",
+                            "id": "38cfb704-64d1-43bf-869f-06aed1a6927c",
                             "pitch": 59.0,
-                            "time": 12.24489,
-                            "duration": 1.2219
+                            "time": 2.5,
+                            "duration": 0.25
                         },
                         {
-                            "id": "f7c09823-20ab-4a13-9ebc-a3786a6d288e",
+                            "id": "675fd0fa-4f83-48fa-8191-4db290da492c",
                             "pitch": 57.0,
-                            "time": 13.469378999999998,
-                            "duration": 2.4464
+                            "time": 2.75,
+                            "duration": 0.5
                         },
                         {
-                            "id": "8ecc112f-1045-4411-a886-feb81c0507d9",
+                            "id": "0674711f-38a4-42f8-b2c0-90025632a147",
                             "pitch": 60.0,
-                            "time": 15.918356999999999,
-                            "duration": 1.2219
+                            "time": 3.25,
+                            "duration": 0.25
                         },
                         {
-                            "id": "f6d08a7e-f5b0-423d-bd0d-eb593a0df5d7",
+                            "id": "52060615-d3bc-4d08-bb40-b8b104ebb4ab",
                             "pitch": 52.0,
-                            "time": 17.142846,
-                            "duration": 1.2219
+                            "time": 3.5,
+                            "duration": 0.25
                         },
                         {
-                            "id": "b608ee38-7609-4a32-8480-4059d453a7b3",
+                            "id": "3e17567c-1510-4245-aa61-8eb7a21baddb",
                             "pitch": 55.0,
-                            "time": 18.367335,
-                            "duration": 1.2219
+                            "time": 3.75,
+                            "duration": 0.25
                         },
                         {
-                            "id": "ea984c80-1d97-47dc-ad63-a56096e95b0f",
+                            "id": "84da2b3a-c570-4659-ab06-b00b35670948",
                             "pitch": 53.0,
-                            "time": 19.591824000000003,
-                            "duration": 1.2219
+                            "time": 4.0,
+                            "duration": 0.25
                         },
                         {
-                            "id": "8d3287cc-8dd9-4c7f-bdb4-796e8c65536d",
+                            "id": "5a7ff3b1-ea33-482e-9708-a3b4859028e5",
                             "pitch": 48.0,
-                            "time": 20.816313000000005,
-                            "duration": 7.3444
+                            "time": 4.25,
+                            "duration": 1.5
                         }
                     ],
                     [],
@@ -135,68 +135,68 @@
                 "bpm": 60.0,
                 "length": 7.5,
                 "name": "",
-                "id": "664d7f98-2458-4cae-9e13-f08c5b688026",
+                "id": "4cfe7f3d-181d-4900-9145-52305253d3ae",
                 "tracks": [
                     [
                         {
-                            "id": "c62c2220-de63-4c8b-9811-eb8d55004784",
+                            "id": "92009ecc-a0d6-4e65-aeb4-24a8da36f9aa",
                             "pitch": 48.0,
                             "time": 0.0,
-                            "duration": 2.9979
+                            "duration": 0.75
                         },
                         {
-                            "id": "d5548b34-c21d-429c-a4a8-f18ed2cdbcb7",
+                            "id": "6a79cb64-336b-4cd7-8176-69811c3ac36f",
                             "pitch": 48.0,
-                            "time": 3.0000000000000036,
-                            "duration": 2.9979
+                            "time": 0.75,
+                            "duration": 0.75
                         },
                         {
-                            "id": "cafb88b7-0189-444b-90e9-63eb7daedbef",
+                            "id": "71d21672-ce0a-40cb-a12c-baa7d6f537ff",
+                            "pitch": 48.0,
+                            "time": 1.5,
+                            "duration": 0.75
+                        },
+                        {
+                            "id": "94a2f8f8-404c-40d4-8031-eacdd5ce726d",
+                            "pitch": 48.0,
+                            "time": 2.25,
+                            "duration": 0.75
+                        },
+                        {
+                            "id": "2840d136-15b9-4666-8806-fece552296dd",
+                            "pitch": 48.0,
+                            "time": 3.0,
+                            "duration": 0.75
+                        },
+                        {
+                            "id": "979a47d1-b761-4c88-b175-6491d336d3e9",
+                            "pitch": 48.0,
+                            "time": 3.75,
+                            "duration": 0.75
+                        },
+                        {
+                            "id": "359be197-74c1-43a2-bc46-c00277912298",
+                            "pitch": 48.0,
+                            "time": 4.5,
+                            "duration": 0.75
+                        },
+                        {
+                            "id": "0973e40c-2324-4afc-ba3e-515194aac943",
+                            "pitch": 48.0,
+                            "time": 5.25,
+                            "duration": 0.75
+                        },
+                        {
+                            "id": "e3dfe8d6-59e0-4811-8a56-cf9f1fe09093",
                             "pitch": 48.0,
                             "time": 6.0,
-                            "duration": 2.9979
+                            "duration": 0.75
                         },
                         {
-                            "id": "8415abcd-cc43-428f-8eb7-074a1d35216c",
+                            "id": "7ffb25db-598e-46b2-ad39-382a8dd8540a",
                             "pitch": 48.0,
-                            "time": 9.0,
-                            "duration": 2.9979
-                        },
-                        {
-                            "id": "e06e6b8c-8e20-4400-a33f-64730fb71e17",
-                            "pitch": 48.0,
-                            "time": 12.0,
-                            "duration": 2.9979
-                        },
-                        {
-                            "id": "9acf6f1f-2ec7-4d9d-a07e-58692d07c6f0",
-                            "pitch": 48.0,
-                            "time": 15.0,
-                            "duration": 2.9979
-                        },
-                        {
-                            "id": "2405e893-a72a-4229-b319-9ce76203756a",
-                            "pitch": 48.0,
-                            "time": 18.0,
-                            "duration": 2.9979
-                        },
-                        {
-                            "id": "8da94f55-22c8-4541-8f39-76e682195fa0",
-                            "pitch": 48.0,
-                            "time": 21.0,
-                            "duration": 2.9979
-                        },
-                        {
-                            "id": "52cc280f-7674-4fd8-9fc6-c67669087d52",
-                            "pitch": 48.0,
-                            "time": 24.0,
-                            "duration": 2.9979
-                        },
-                        {
-                            "id": "0922ddd2-0eed-4bad-bdeb-60932f397a2d",
-                            "pitch": 48.0,
-                            "time": 27.0,
-                            "duration": 2.9979
+                            "time": 6.75,
+                            "duration": 0.75
                         }
                     ],
                     [],

@@ -2,6 +2,8 @@ from cyclopts import App
 
 from pathlib import Path
 
+import json
+
 import mido
 
 app = App()
@@ -212,6 +214,232 @@ def view_patch_presets():
     print(f"{color.BOLD}{"Index":<10}{"Instrument":<25}Category{color.END}")
     for i, (instrument, category) in enumerate(patch_presets):
         print(f"{i:<10}{instrument:<25}{category}")
+
+@app.command
+def convert_to_patch(mid_file: Path):
+    mid = mido.MidiFile(mid_file, clip=True)
+    def roundPartial(value, resolution):
+        return round(value / resolution) * resolution
+
+
+    patterns = []
+    prev_tempo = None
+    time = 0
+    for msg in mid:
+        time += msg.time
+        if msg.type == "program_change":
+            print(msg)
+        if msg.type == "set_tempo":
+            print(msg)
+            print("Tempo set to", msg.tempo)
+            bpm = 6e7 / msg.tempo
+            if prev_tempo != msg.tempo:
+                if prev_tempo is not None:
+                    print("TIME", msg.time)
+                    length = time * patterns[-1]["bpm"] / 60 / 4
+                    print("LENGTH", length)
+                    patterns[-1]["time"] = time
+                    patterns[-1]["cumulative_time"] = time if len(patterns) <= 1 else time + patterns[-2]["cumulative_time"]
+                    patterns[-1]["length"] = roundPartial(length, 0.25)
+                    time = 0 # time resets every time tempo changes
+                patterns.append({"bpm": bpm})
+            print("bpm:", round(bpm, 1))
+            prev_tempo = msg.tempo
+    else:
+        length = time * patterns[-1]["bpm"] / 60 / 4
+        print("LENGTH", length)
+        patterns[-1]["time"] = time
+        patterns[-1]["cumulative_time"] = time if len(patterns) <= 1 else time + patterns[-2]["cumulative_time"]
+        patterns[-1]["length"] = roundPartial(length, 0.25)
+        print("TIME", time)
+        print("length", length)
+    print(patterns)
+    mid.save(mid_file.with_name(f"{mid_file.stem}_converted.mid"))
+
+    # Initialize lists to store MIDI data and output
+    midi_events = []
+    outputs = [[]]
+    i = 0
+
+    # Extract relevant MIDI events and convert them to dictionaries
+    for event in mid:
+        midi_events.append(event.dict())
+
+    # Convert delta times to absolute times
+    current_time = 0
+    for event in midi_events:
+        event["time"] += current_time
+        current_time = event["time"]
+
+        # Convert note_on events with 0 velocity to note_off events
+        if event["type"] == "note_on" and event["velocity"] == 0:
+            event["type"] = "note_off"
+
+        # Prepare the event data for output
+        event_data = []
+        if event["type"] in ["note_on", "note_off"]:
+            event_data = [event["type"], event["note"], event["time"], event["channel"]]
+            if event["time"] < patterns[i]["cumulative_time"]:
+                if i >= 1:
+                    event_data[2] -= patterns[i - 1]["cumulative_time"]
+                outputs[i].append(event_data)
+            else:
+                i += 1
+                event_data[2] -= patterns[i - 1]["cumulative_time"]
+                outputs.append([event_data])
+            print("event_data", event_data)
+
+    # Display the processed MIDI events
+    for i, output in enumerate(outputs):
+        print("Pattern", i)
+        for event in output:
+            print(event)
+
+    def generate_tracks(output):
+        # create a 31-element list of empty lists called "tracks"
+        tracks = [[] for _ in range(31)]
+
+        # put all notes in the right track
+        for event in output:
+            tracks[event[3]].append(event)
+
+        # put all notes in the right order
+        for track in tracks:
+            track.sort(key=lambda event: event[2])
+
+        # print all tracks
+        for track in tracks:
+            print(track)
+        print()
+
+        return tracks
+
+
+    tracks_list = []
+    for output in outputs:
+        tracks_list.append(generate_tracks(output))
+
+    import uuid
+
+
+    def format_tracks(tracks):
+        tracks_with_duration = [[] for _ in range(31)]
+
+        # calculate the duration of each note
+        for event in range(len(tracks)):
+            for j in range(len(tracks[event])):
+                if tracks[event][j][0] == "note_on":
+                    for k in range(j, len(tracks[event])):
+                        if (
+                            tracks[event][k][0] == "note_off"
+                            and tracks[event][k][1] == tracks[event][j][1]
+                        ):
+                            tracks_with_duration[event].append(
+                                {
+                                    "id": str(uuid.uuid4()),
+                                    "pitch": float(tracks[event][j][1]),
+                                    "time": tracks[event][j][2],
+                                    "duration": round(
+                                        (tracks[event][k][2] - tracks[event][j][2])
+                                        * bpm
+                                        / 60,
+                                        4,
+                                    ),
+                                }
+                            )
+                            break
+
+        # print all tracks with duration
+        for event in tracks_with_duration:
+            print(event)
+        print()
+
+        return tracks_with_duration
+
+
+    tracks_with_duration_list = []
+    for tracks in tracks_list:
+        tracks_with_duration_list.append(format_tracks(tracks))
+
+    total_time = 0
+    for msg in mid:
+        total_time += msg.time
+
+    print("Total time:", total_time)
+
+    size = round(
+        total_time * bpm / 60 / 4
+    )  # because 60 seconds in a minute (we use bpm <- minute) and 4 beats in a bar
+
+    print("Size:", size)
+
+    # program_change channel=0 program=36 time=0
+    # program_change channel=1 program=0 time=0
+    # program_change channel=2 program=32 time=0
+    # program_change channel=3 program=0 time=0
+    # program_change channel=4 program=81 time=0
+    # program_change channel=5 program=80 time=0
+    # program_change channel=6 program=81 time=0
+    # program_change channel=7 program=42 time=0
+    # program_change channel=8 program=64 time=0
+    # program_change channel=9 program=0 time=0
+    # program_change channel=10 program=64 time=0
+    # program_change channel=11 program=64 time=0
+    # program_change channel=12 program=64 time=0
+    # program_change channel=13 program=64 time=0
+    # program_change channel=14 program=64 time=0
+    # program_change channel=15 program=64 time=0
+    channel_patches = [
+        35,
+        31,
+        30,
+        31,
+        9,
+        80,
+        5,
+        16,
+        11,
+        33,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+    ]
+
+    res = {
+        "value0": {
+            "patterns": [
+                {
+                    "bpm": round(patterns[i]["bpm"], 1),
+                    "length": patterns[i]["length"],
+                    "name": "",
+                    "id": str(uuid.uuid4()),
+                    "tracks": tracks_with_duration_list[i],
+                }
+                for i in range(len(patterns))
+            ],
+            "channels": [
+                {
+                    "patch": patch,
+                    "atk": 0.0010000000474974514,
+                    "rel": 0.12999999523162843,
+                    "volume": 1.0,
+                    "pan": 0.0,
+                    "lp": 20000.0,
+                    "tune": 0.0,
+                    "soft": True
+                }
+                for patch in channel_patches
+            ]
+        }
+    }
+
+    # output to song.json
+    with open("song.json", "w") as f:
+        json.dump(res, f, indent=4)
+        
 
 
 @app.default
